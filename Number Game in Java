@@ -1,0 +1,66 @@
+import java.util.Scanner;
+import java.util.Random;
+
+class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        
+        System.out.println("Welcome to the Number Guessing Game!");
+
+       
+        System.out.print("Enter the number of rounds you want to play: ");
+        int totalRounds = 0;
+        try {
+            totalRounds = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid input! Defaulting to 1 round.");
+            totalRounds = 1;
+            scanner.nextLine(); 
+        }
+
+        int score = 0;
+        int maxAttempts = 5; 
+
+        
+        for (int round = 1; round <= totalRounds; round++) {
+            System.out.println("\nRound " + round + ":");
+            int targetNumber = random.nextInt(100) + 1; 
+            boolean roundWon = false;
+
+           
+            for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+                System.out.print("Attempt " + attempt + "/" + maxAttempts + " - Enter your guess: ");
+                
+                int guess;
+                try {
+                    guess = scanner.nextInt(); 
+                } catch (Exception e) {
+                    System.out.println("Invalid input! Please enter a number.");
+                    scanner.nextLine();
+                    continue;
+                }
+
+                if (guess < targetNumber) {
+                    System.out.println("Too low!");
+                } else if (guess > targetNumber) {
+                    System.out.println("Too high!");
+                } else {
+                    System.out.println("Correct! The number was " + targetNumber + ".");
+                    roundWon = true;
+                    score++;
+                    break;
+                }
+            }
+
+            if (!roundWon) {
+                System.out.println("Sorry, you ran out of attempts. The correct number was " + targetNumber + ".");
+            }
+        }
+
+       
+        System.out.println("\nGame Over! You won " + score + " out of " + totalRounds + " rounds.");
+        scanner.close();
+    }
+}
