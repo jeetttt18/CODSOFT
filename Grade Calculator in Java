@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the number of subjects: ");
+        int numSubjects = sc.nextInt();
+        int totalMarks = 0;
+
+        for (int i = 1; i <= numSubjects; i++) {
+            System.out.print("Enter marks for subject " + i + ": ");
+            totalMarks += sc.nextInt();
+        }
+
+        double average = (double) totalMarks / numSubjects;
+        char grade = (average >= 90) ? 'A' : (average >= 80) ? 'B' : 
+                     (average >= 70) ? 'C' : (average >= 60) ? 'D' : 
+                     (average >= 50) ? 'E' : 'F';
+
+        System.out.println("\nTotal Marks: " + totalMarks);
+        System.out.println("Average Percentage: " + average + "%");
+        System.out.println("Grade: " + grade);
+
+        sc.close();
+    }
+}
