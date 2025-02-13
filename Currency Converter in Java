@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Main {  
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       
+        HashMap<String, Double> exchangeRates = new HashMap<>();
+        exchangeRates.put("USD_TO_INR", 83.0);
+        exchangeRates.put("USD_TO_EUR", 0.92);
+        exchangeRates.put("INR_TO_USD", 0.012);
+        exchangeRates.put("EUR_TO_USD", 1.09);
+
+        
+        System.out.print("Enter base currency (USD, INR, EUR): ");
+        String baseCurrency = scanner.next().toUpperCase();
+
+        
+        System.out.print("Enter target currency (USD, INR, EUR): ");
+        String targetCurrency = scanner.next().toUpperCase();
+
+
+        System.out.print("Enter amount: ");
+        double amount = scanner.nextDouble();
+
+        
+        String key = baseCurrency + "_TO_" + targetCurrency;
+        if (exchangeRates.containsKey(key)) {
+            double rate = exchangeRates.get(key);
+            double convertedAmount = amount * rate;
+            System.out.printf("Converted Amount: %.2f %s\n", convertedAmount, targetCurrency);
+        } else {
+            System.out.println("Exchange rate not available.");
+        }
+
+        scanner.close();
+    }
+}
